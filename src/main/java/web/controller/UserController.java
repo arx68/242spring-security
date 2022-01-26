@@ -76,7 +76,6 @@ public class UserController {
 		return "redirect:/admin/users";
 	}
 
-
 	@GetMapping("admin/delete")
 	public String delete(@RequestParam("id") Long id, Model model) {
 		model.addAttribute("id", id);

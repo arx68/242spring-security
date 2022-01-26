@@ -18,12 +18,9 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import web.config.handler.LoginSuccessHandler;
 
-import javax.sql.DataSource;
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
 
     // сервис, с помощью которого тащим пользователя
     @Autowired
@@ -36,19 +33,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         this.loginSuccessHandler = loginSuccessHandler;
     }
 
-    /* Место от куда берется информация о пользователях
-       Метод loadUserByUsername вызывается, когда пользователь пытается войти в систему с именем пользователя и паролем.
-       объект UserDetailsService не работает, когда аутентификация не основана на имени пользователя и пароле.
-       */
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService);
     }
-
-    /*@Override
-    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-    }*/
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
